@@ -3,13 +3,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Delicacies from './screens/Delicacies';
 import Restaurants from './screens/Restaurants';
-import BicolExpressDetails from './screens/BicolExpressDetails';
 import Login from  './screens/Login'
 import Signup from './screens/Signup'
 import initDB from './db/initDB';
 import { ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BottomTabs from './screens/BottomTabs';
+import DelicacyDetails from './screens/DelicacyDetails';
 
 const Stack = createStackNavigator();
 
@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     const checkIslogin = async () => {
-      const loginStatus = await AsyncStorage.getItem("status")
+      const loginStatus = await AsyncStorage.getItem("loginStatus")
       console.log("loginStatus: ", loginStatus)
       if(loginStatus === "true"){
         setIsLogin(true)
@@ -75,8 +75,8 @@ const App = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="BicolExpressDetails"
-              component={BicolExpressDetails}
+              name="Details"
+              component={DelicacyDetails}
               options={{ headerShown: false }}
             />
       </Stack.Navigator>

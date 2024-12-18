@@ -34,7 +34,7 @@ const Profile = ({ navigation }) => {
       setEmail(email);
     };
     getUsername();
-  }, [navigation]);
+  }, [navigation,refresh]);
 
 
   const signOut = async () => {
@@ -103,6 +103,8 @@ const Profile = ({ navigation }) => {
               onPress={() => {
                 updateProfile();
                 setModalVisible(false);
+                setRefresh(!refresh)
+
               }}
             >
               <Text style={styles.confirmButtonText}>Confirm</Text>

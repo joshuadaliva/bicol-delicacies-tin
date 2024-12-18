@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import addDelicaciesRestaurant from '../db/addDelicaciesRestaurant';
+
 
 const HomePage = ({ navigation }) => {
+
+
+
+  useEffect (() => {
+    const insertData = async () => {
+      const result = await addDelicaciesRestaurant()
+    }
+    insertData()
+  },[navigation])
+
+
+
   return (
     <View style={styles.pageContainer}>
 

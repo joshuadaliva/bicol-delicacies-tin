@@ -15,30 +15,40 @@ const initDB = async () => {
         )   
     `)
     console.log("users table created")
-    // await db.execAsync(`
-    //     CREATE TABLE IF NOT EXISTS emergency(
-    //         emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    //         nameOfService TEXT NOT NULL,
-    //         image TEXT NOT NULL,
-    //         address TEXT NOT NULL,
-    //         hotline TEXT NOT NULL,
-    //         typeOfService TEXT NOT NULL
-    //     )   
-    // `)
-    // console.log("table emergency created")
-    // await db.execAsync(`
-    //     CREATE TABLE IF NOT EXISTS saveEmergency(
-    //         save_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    //         nameOfService TEXT NOT NULL,
-    //         image TEXT NOT NULL,
-    //         address TEXT NOT NULL,
-    //         hotline TEXT NOT NULL,
-    //         user_id INTEGER NOT NULL,
-    //         typeOfService TEXT NOT NULL,
-    //         FOREIGN KEY(user_id) REFERENCES users(user_id)
-    //     )   
-    // `)
-    // console.log("table saveEmergency created")
+    await db.execAsync(`
+        CREATE TABLE IF NOT EXISTS delicacies(
+            delicacy_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            delicacyName TEXT NOT NULL,
+            image TEXT NOT NULL,
+            price TEXT NOT NULL,
+            location TEXT NOT NULL,
+            ingredients TEXT NOT NULL,
+            description TEXT NOT NULL,
+            ratings TEXT NOT NULL
+        
+        )   
+    `)
+    console.log("table delicacies created")
+    await db.execAsync(`
+        CREATE TABLE IF NOT EXISTS restaurants(
+            restaurant_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            restaurant_name TEXT NOT NULL,
+            image TEXT NOT NULL,
+            location TEXT NOT NULL,
+            ratings TEXT NOT NULL
+        )   
+    `)
+    console.log("table restuarants created")
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS messages(
+          message_id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL,
+          message TEXT NOT NULL,
+          user_id INTEGER NOT NULL,
+          FOREIGN KEY(user_id) REFERENCES users(user_id)
+      )   
+  `)
+  console.log("table messages created")
     return true
   }catch(error){
     console.log(error)

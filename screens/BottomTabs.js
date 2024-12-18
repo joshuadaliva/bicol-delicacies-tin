@@ -16,7 +16,7 @@ const BottomTabs = () => (
         if (route.name === "Homes") {
           iconName = focused ? "home" : "home-outline";
         } else if (route.name === "Messages") {
-          iconName = focused ? "cloud" : "cloud-outline";
+          iconName = focused ? "chatbubble" : "chatbubble-outline";
         } else if (route.name === "Profile") {
           iconName = focused ? "person" : "person-outline";
         }

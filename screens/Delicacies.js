@@ -1,96 +1,122 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import BicolExpressDetails from './BicolExpressDetails'; // Import BicolExpressDetails screen
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SQLite from "expo-sqlite";
 
 const Delicacies = ({ navigation }) => {
-  const [selectedDelicacy, setSelectedDelicacy] = useState(null);
+  const [data, setData] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
-  const handleDelicacySelect = (delicacy) => {
-    if (delicacy === 'Bicol Express') {
-      setSelectedDelicacy('Bicol Express');
-    }
-  };
+  useEffect(() => {
+    const fetchPost = async () => {
+      const db = await SQLite.openDatabaseAsync("bicol_delicacies")
+      const result = await db.getAllAsync(
+        "SELECT * FROM delicacies"
+      );
+      setData(result);
+    };
+    fetchPost();
+  }, [refresh,navigation]);
 
-  const renderContent = () => {
-    if (selectedDelicacy) {
-      return <BicolExpressDetails onBack={() => setSelectedDelicacy(null)} />;
-    }
 
-    const delicacies = [
-      'Bicol Express',
-      'Laing',
-      'Pinangat',
-      'Kinalas',
-      'Pancit Bato',
-      'Ginataang Santol',
-    ];
 
+
+  if (data.length === 0) {
     return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Icon name="arrow-back" size={24} color="black" />
-        </TouchableOpacity>
-
-        <Text style={styles.title}>Delicacies</Text>
-
-        <View style={styles.delicaciesContainer}>
-          {delicacies.map((food, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.foodButton}
-              onPress={() => handleDelicacySelect(food)}
-            >
-              <Text style={styles.foodButtonText}>{food}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+      <View>
+        <Text>No data available</Text>
       </View>
     );
-  };
+  }
 
-  return renderContent(); // Render the appropriate content based on selected delicacy
+  return (
+    <View style={styles.container}>
+      <Text style={{fontSize:40, marginVertical:20, fontWeight:"800"}}>Delicacies</Text>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.data}
+            onPress={() =>
+              navigation.navigate("Details", {
+                id: item.delicacy_id,
+              })
+            }
+          >
+            <View style={styles.dataImage}>
+              <Image source={{ uri: item.image }} style={styles.image} />
+            </View>
+            <View style={styles.dataDetails}>
+              <Text style={styles.dataName}>{item.delicacyName}</Text>
+              <Text style={styles.dataInfo}>Price: {item.price}</Text>
+              <Text style={styles.dataInfo}>description: {item.description}</Text>
+              <Text style={styles.dataInfo}>ratings: {item.ratings}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
+    </View>
+  );
 };
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 20,
+    backgroundColor: "#fff",
   },
-  title: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: 'black',
-    textAlign: 'center',
-  },
-  foodButton: {
-    backgroundColor: 'black',
-    padding: 15,
+  data: {
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "#ddd",
     borderRadius: 10,
+    overflow: "hidden",
+    backgroundColor: "#f9f9f9",
+  },
+  deleteButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    padding: 5,
+    zIndex: 1,
+  },
+  deleteIcon: {
+    color: "red",
+  },
+  dataImage: {
+    alignItems: "center",
     marginVertical: 10,
-    width: '80%',
-    alignItems: 'center',
   },
-  foodButtonText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
+  image: {
+    width: "90%",
+    height: 200,
+    borderRadius: 10,
   },
-  backButton: {
-    position: 'absolute',
-    top: 40,
-    left: 20,
-    backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 5,
+  dataDetails: {
+    paddingHorizontal: 10,
+    paddingBottom: 10,
   },
-  delicaciesContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
+  dataName: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  dataInfo: {
+    fontSize: 14,
+    color: "#555",
   },
 });
 
 export default Delicacies;
+
+
+
+
