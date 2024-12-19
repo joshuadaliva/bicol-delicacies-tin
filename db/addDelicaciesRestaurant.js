@@ -7,16 +7,16 @@ const addDelicaciesRestaurant = async () => {
     const delicaciesData = [
         {   
             "delicacyName": "Bicol Express",
-            "image": "https://example.com/images/hospital1.jpg",
+            "image": "https://yummykitchentv.com/wp-content/uploads/2023/02/creamy-bicol-express.jpg",
             "price": "200",
             "location": "Bicol",
             "ingredients": "- Pork belly - Coconut milk -Chili peppers -Shrimp paste -Onion -Garlic",
             "description": "Bicol Express is a spicy Filipino dish made from pork, coconut milk, and chili peppers.",
             "ratings": "5",
         },
-        {   
+        { 
             "delicacyName": "Laing",
-            "image": "https://example.com/images/hospital1.jpg",
+            "image": "https://maputingcooking.com/wp-content/uploads/2017/12/laing-real.jpg",
             "price": "100",
             "location": "Pili",
             "ingredients": "- Fish -Chili peppers -Shrimp paste -Onion -Garlic",
@@ -25,7 +25,7 @@ const addDelicaciesRestaurant = async () => {
         },
         {   
             "delicacyName": "Pinangat",
-            "image": "https://example.com/images/hospital1.jpg",
+            "image": "https://i.ytimg.com/vi/-PlgE2ClT0g/maxresdefault.jpg",
             "price": "100",
             "location": "Bula",
             "ingredients": "-Fish -coconut",
@@ -34,7 +34,7 @@ const addDelicaciesRestaurant = async () => {
         },
         {   
             "delicacyName": "Kinalas",
-            "image": "https://example.com/images/hospital1.jpg",
+            "image": "https://legazpifoodblog.wordpress.com/wp-content/uploads/2018/02/kinalas.jpg?w=1400",
             "price": "50",
             "location": "Bula",
             "ingredients": "-Noodles -Sabaw haha",
@@ -43,7 +43,7 @@ const addDelicaciesRestaurant = async () => {
         },
         {   
             "delicacyName": "Pancit Bato",
-            "image": "https://example.com/images/hospital1.jpg",
+            "image": "https://panlasangpinoy.com/wp-content/uploads/2014/05/Pancit-Bato-Soup-Recipe.jpg",
             "price": "50",
             "location": "Naga",
             "ingredients": "-Pancit -Sabaw haha",
@@ -52,7 +52,7 @@ const addDelicaciesRestaurant = async () => {
         },
         {   
             "delicacyName": "Ginataang Santol",
-            "image": "https://example.com/images/hospital1.jpg",
+            "image": "https://filifoodblog02.wordpress.com/wp-content/uploads/2018/07/1531918107769.png",
             "price": "50",
             "location": "Naga",
             "ingredients": "-Pancit -Sabaw haha",
@@ -64,25 +64,25 @@ const addDelicaciesRestaurant = async () => {
     const restaurantsData = [
         {   
             "restaurant_name": "Red Platter",
-            "image": "https://example.com/images/hospital1.jpg",
+            "image": "https://redplatter.ph/restaurant/wp-content/themes/nagacityguide/assets/images/about-red-platter.jpg",
             "location": "Naga",
             "ratings": "5",
         },
         {   
             "restaurant_name": "Geewan",
-            "image": "https://example.com/images/hospital1.jpg",
+            "image": "https://cdn.tasteatlas.com//images/restaurants/4cf933ee74704630a6e582ea29ecf716.jpg?mw=560",
             "location": "Bula",
             "ratings": "4.5",
         },
         {   
             "restaurant_name": "Biggs Diner",
-            "image": "https://example.com/images/hospital1.jpg",
+            "image": "https://farm9.staticflickr.com/8235/8508714903_341544fb68.jpg",
             "location": "Nabua",
             "ratings": "4.1",
         },
         {   
             "restaurant_name": "Green Earth Cafe",
-            "image": "https://example.com/images/hospital1.jpg",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3V2jsJMr_aY8t6jNysE-UXy3btDeBuT1Aaw&s",
             "location": "Pili",
             "ratings": "5",
         },
