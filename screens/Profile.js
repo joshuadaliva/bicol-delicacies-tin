@@ -34,7 +34,7 @@ const Profile = ({ navigation }) => {
       setEmail(email);
     };
     getUsername();
-  }, [navigation,refresh]);
+  }, [navigation,refresh,email]);
 
 
   const signOut = async () => {
@@ -51,28 +51,34 @@ const Profile = ({ navigation }) => {
   };
 
   const updateProfile = async () => {
-    try {
-      const db = await SQLite.openDatabaseAsync("bicol_delicacies")
-      const user_id = Number(await AsyncStorage.getItem("id"));
-      const existingUser  = await db.getFirstAsync("SELECT * FROM users WHERE email = ?", [input1]);
-        if (existingUser) {
-            Alert.alert("Please use another email");
-            return false;
-        }
-      const result = await db.runAsync(
-        "UPDATE users SET name = ?, email = ? WHERE user_id =? ",
-        [input1, input2, user_id]
-      );
-      if (result.changes > 0) {
-        Alert.alert("profile updated!!");
-        await AsyncStorage.setItem("name", input1);
-        await AsyncStorage.setItem("email", input2);
-        setRefresh(!refresh);
-      }
-    } catch (error) {
-      console.log(error);
+  try {
+    const db = await SQLite.openDatabaseAsync("bicol_delicacies");
+    const user_id = Number(await AsyncStorage.getItem("id"));
+    const existingUser  = await db.getFirstAsync("SELECT * FROM users WHERE email = ?", [input1]);
+    
+    if (existingUser ) {
+      Alert.alert("Please use another email");
+      return false;
     }
-  };
+
+    const result = await db.runAsync(
+      "UPDATE users SET name = ?, email = ? WHERE user_id =? ",
+      [input1, input2, user_id]
+    );
+
+    if (result.changes > 0) {
+      Alert.alert("Profile updated!!");
+      await AsyncStorage.setItem("name", input1);
+      await AsyncStorage.setItem("email", input2);
+      setName(input1);
+      setEmail(input2);
+      
+      setModalVisible(false);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   return (
     <ScrollView style={styles.container}>
